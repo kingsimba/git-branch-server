@@ -36,7 +36,7 @@ export class GitView {
 // Create a sub-router
 export const gitRouter = express.Router();
 
-gitRouter.get('/:user/:repo/branches', async (req: { params: { user: string, repo: string }, query: { type: string } }, res) => {
+gitRouter.get('/repos/:user/:repo/branches', async (req: { params: { user: string, repo: string }, query: { type: string } }, res) => {
     const branches = await GitView.branches(`git@github.com:${req.params.user}/${req.params.repo}`);
     if (branches instanceof HttpError) {
         res.status(branches.status).send({ "error": branches.message });
